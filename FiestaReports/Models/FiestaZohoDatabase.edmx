@@ -4,7 +4,115 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FiestaZohoDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FiestaZohoDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Fiesta_Employee">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Reset" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Fiesta_EmpStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="AssignDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_EmpStore' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Fiesta_EmpStore">
+          <Key>
+            <PropertyRef Name="EmpId" />
+            <PropertyRef Name="StoreNo" />
+          </Key>
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="StoreNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AssignDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Fiesta_EmpStoreReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="StoreNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReportId" Type="int" Nullable="false" />
+          <Property Name="AssignDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Fiesta_ExcelCompare">
+          <Key>
+            <PropertyRef Name="DbColName" />
+            <PropertyRef Name="ExcelColName" />
+            <PropertyRef Name="ReportId" />
+            <PropertyRef Name="Datatype" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="DbColName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ExcelColName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReportId" Type="int" Nullable="false" />
+          <Property Name="Datatype" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fiesta_Store">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+          </Key>
+          <Property Name="StoreNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="Street" Type="varchar" MaxLength="500" />
+          <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="10" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ReportFileUploads">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ReportName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="UploadedBy" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="UploadDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Fiesta_Report">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportName" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fiesta_Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fiesta_State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateCode" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
         <Function Name="AddStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StateId" Type="int" Mode="In" />
           <Parameter Name="StoreNumber" Type="varchar" Mode="In" />
@@ -74,7 +182,32 @@
           <Parameter Name="Email" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
-        <EntityContainer Name="FiestaZohoDatabaseModelStoreContainer" />
+        <EntityContainer Name="FiestaZohoDatabaseModelStoreContainer">
+          <EntitySet Name="Fiesta_Employee" EntityType="Self.Fiesta_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fiesta_EmpStates" EntityType="Self.Fiesta_EmpStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fiesta_EmpStoreReport" EntityType="Self.Fiesta_EmpStoreReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fiesta_Store" EntityType="Self.Fiesta_Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportFileUploads" EntityType="Self.ReportFileUploads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fiesta_Report" EntityType="Self.Fiesta_Report" Schema="MasterLookup" store:Type="Tables" />
+          <EntitySet Name="Fiesta_Role" EntityType="Self.Fiesta_Role" Schema="MasterLookup" store:Type="Tables" />
+          <EntitySet Name="Fiesta_State" EntityType="Self.Fiesta_State" Schema="MasterLookup" store:Type="Tables" />
+          <EntitySet Name="Fiesta_EmpStore" EntityType="Self.Fiesta_EmpStore" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Fiesta_EmpStore].[EmpId] AS [EmpId], 
+    [Fiesta_EmpStore].[StoreNo] AS [StoreNo], 
+    [Fiesta_EmpStore].[AssignDate] AS [AssignDate]
+    FROM [dbo].[Fiesta_EmpStore] AS [Fiesta_EmpStore]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Fiesta_ExcelCompare" EntityType="Self.Fiesta_ExcelCompare" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Fiesta_ExcelCompare].[DbColName] AS [DbColName], 
+    [Fiesta_ExcelCompare].[ExcelColName] AS [ExcelColName], 
+    [Fiesta_ExcelCompare].[ReportId] AS [ReportId], 
+    [Fiesta_ExcelCompare].[Datatype] AS [Datatype], 
+    [Fiesta_ExcelCompare].[IsActive] AS [IsActive]
+    FROM [dbo].[Fiesta_ExcelCompare] AS [Fiesta_ExcelCompare]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -149,6 +282,16 @@
             <Parameter Name="City" Mode="In" Type="String" />
             <Parameter Name="ZipCode" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Fiesta_Employee" EntityType="FiestaZohoDatabaseModel.Fiesta_Employee" />
+          <EntitySet Name="Fiesta_EmpStates" EntityType="FiestaZohoDatabaseModel.Fiesta_EmpStates" />
+          <EntitySet Name="Fiesta_EmpStoreReport" EntityType="FiestaZohoDatabaseModel.Fiesta_EmpStoreReport" />
+          <EntitySet Name="Fiesta_Store" EntityType="FiestaZohoDatabaseModel.Fiesta_Store" />
+          <EntitySet Name="ReportFileUploads" EntityType="FiestaZohoDatabaseModel.ReportFileUpload" />
+          <EntitySet Name="Fiesta_EmpStore" EntityType="FiestaZohoDatabaseModel.Fiesta_EmpStore" />
+          <EntitySet Name="Fiesta_ExcelCompare" EntityType="FiestaZohoDatabaseModel.Fiesta_ExcelCompare" />
+          <EntitySet Name="Fiesta_Report" EntityType="FiestaZohoDatabaseModel.Fiesta_Report" />
+          <EntitySet Name="Fiesta_Role" EntityType="FiestaZohoDatabaseModel.Fiesta_Role" />
+          <EntitySet Name="Fiesta_State" EntityType="FiestaZohoDatabaseModel.Fiesta_State" />
         </EntityContainer>
         <ComplexType Name="ValidateLogin_Result">
           <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="201" />
@@ -184,6 +327,110 @@
           <Property Type="String" Name="FirstName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="LastName" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="Fiesta_Employee">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Reset" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Fiesta_EmpStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="AssignDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Fiesta_EmpStoreReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="StoreNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReportId" Type="Int32" Nullable="false" />
+          <Property Name="AssignDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Fiesta_Store">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+          </Key>
+          <Property Name="StoreNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ReportFileUpload">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileGUID" Type="Guid" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ReportName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedBy" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Fiesta_EmpStore">
+          <Key>
+            <PropertyRef Name="EmpId" />
+            <PropertyRef Name="StoreNo" />
+          </Key>
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="StoreNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssignDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Fiesta_ExcelCompare">
+          <Key>
+            <PropertyRef Name="DbColName" />
+            <PropertyRef Name="ExcelColName" />
+            <PropertyRef Name="ReportId" />
+            <PropertyRef Name="Datatype" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="DbColName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExcelColName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReportId" Type="Int32" Nullable="false" />
+          <Property Name="Datatype" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fiesta_Report">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Fiesta_Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Fiesta_State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -260,6 +507,115 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="DeleteReportsByStore" FunctionName="FiestaZohoDatabaseModel.Store.DeleteReportsByStore" />
           <FunctionImportMapping FunctionImportName="AddStore" FunctionName="FiestaZohoDatabaseModel.Store.AddStore" />
+          <EntitySetMapping Name="Fiesta_Employee">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.Fiesta_Employee">
+              <MappingFragment StoreEntitySet="Fiesta_Employee">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Reset" ColumnName="Reset" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fiesta_EmpStates">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.Fiesta_EmpStates">
+              <MappingFragment StoreEntitySet="Fiesta_EmpStates">
+                <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fiesta_EmpStoreReport">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.Fiesta_EmpStoreReport">
+              <MappingFragment StoreEntitySet="Fiesta_EmpStoreReport">
+                <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fiesta_Store">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.Fiesta_Store">
+              <MappingFragment StoreEntitySet="Fiesta_Store">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportFileUploads">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.ReportFileUpload">
+              <MappingFragment StoreEntitySet="ReportFileUploads">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileGUID" ColumnName="FileGUID" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fiesta_EmpStore">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.Fiesta_EmpStore">
+              <MappingFragment StoreEntitySet="Fiesta_EmpStore">
+                <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fiesta_ExcelCompare">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.Fiesta_ExcelCompare">
+              <MappingFragment StoreEntitySet="Fiesta_ExcelCompare">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Datatype" ColumnName="Datatype" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="ExcelColName" ColumnName="ExcelColName" />
+                <ScalarProperty Name="DbColName" ColumnName="DbColName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fiesta_Report">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.Fiesta_Report">
+              <MappingFragment StoreEntitySet="Fiesta_Report">
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fiesta_Role">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.Fiesta_Role">
+              <MappingFragment StoreEntitySet="Fiesta_Role">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fiesta_State">
+            <EntityTypeMapping TypeName="FiestaZohoDatabaseModel.Fiesta_State">
+              <MappingFragment StoreEntitySet="Fiesta_State">
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

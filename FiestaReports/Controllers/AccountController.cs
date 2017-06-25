@@ -228,11 +228,11 @@ namespace FiestaReports.Controllers
             var res = string.Empty;
                 using (fze = new FiestaZohoDatabaseEntities())
                 {
-                    
-                    objUser.password = Convert.ToBase64String(
-              System.Security.Cryptography.SHA256.Create()
-              .ComputeHash(Encoding.UTF8.GetBytes(objUser.password)));
-                    var usr = fze.ValidateLogin(objUser.emailEmployee, objUser.password).ToList();
+
+                objUser.password = Convert.ToBase64String(
+          System.Security.Cryptography.SHA256.Create()
+          .ComputeHash(Encoding.UTF8.GetBytes(objUser.password)));
+                var usr = fze.ValidateLogin(objUser.emailEmployee, objUser.password).ToList();
 
                     if (usr != null && usr.Count() > 0)
                     {

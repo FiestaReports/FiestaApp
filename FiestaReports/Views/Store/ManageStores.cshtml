@@ -1,13 +1,16 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ManageStores";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js"></script>
+
 <script>
     $(document).ready(function () {
         /***   Page Load Event ***/
-
-
+        LoadStores();
+        
         /***   Returns all the States ***/
         $.ajax({
             url: "@Url.Action("GetStates", "Account")",
@@ -38,9 +41,8 @@
                     StoreNumber: $("#txtStoreNo").val(),
                     Address: $("#txtAddress").val(),
                     City: $("#txtCity").val(),
-                    ZipCode: $("#tztZipCode").val()
+                    ZipCode: $("#txtZipCode").val()
                 }
-                console.log(obj);
                 $.ajax({
                     url: "@Url.Action("AddStore", "Store")",
                     dataType: "json",
@@ -56,8 +58,9 @@
                         else {
                             $("#store_success").show();
                             $("#store_failure").hide();
+                            ClearControls();
+                            $('#stores').DataTable().ajax.reload();
                         }
-
                     }
                 });
             }
@@ -89,6 +92,30 @@
         }
         return flag;
     }
+    
+    function ClearControls() {
+        $("#dlStates").val(0),
+        $("#txtStoreNo").val(''),
+        $("#txtAddress").val(''),
+        $("#txtCity").val(''),
+        $("#txtZipCode").val('')
+    }
+
+    function LoadStores() {
+        $('#stores').DataTable({
+            ajax:{ 
+                url:"@Url.Action("GetAllStores", "Store")",
+            dataSrc: ''
+        },
+            columns: [
+                { data: 'StoreNo' },
+                { data: 'Street' },
+                { data: 'State' },
+                { data: 'City' },
+                { data: 'ZipCode' }
+            ]
+    });
+}
 </script>
 <div class="container">
     <h3>Manage stores</h3>
@@ -144,31 +171,16 @@
                 <td>
                     <div>
                         <form style="padding-top:10px">
-                            <table class="table table-bordered">
+                            <table id="stores" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Firstname</th>
-                                        <th>Lastname</th>
-                                        <th>Email</th>
+                                        <th>Store No</th>
+                                        <th>Street</th>
+                                        <th>State</th>
+                                        <th>City</th>
+                                        <th>Zip Code</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        <td>john@example.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mary</td>
-                                        <td>Moe</td>
-                                        <td>mary@example.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>July</td>
-                                        <td>Dooley</td>
-                                        <td>july@example.com</td>
-                                    </tr>
-                                </tbody>
                             </table>
                         </form>
                     </div>

@@ -27,6 +27,16 @@ namespace FiestaReports.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Fiesta_Employee> Fiesta_Employee { get; set; }
+        public virtual DbSet<Fiesta_EmpStates> Fiesta_EmpStates { get; set; }
+        public virtual DbSet<Fiesta_EmpStoreReport> Fiesta_EmpStoreReport { get; set; }
+        public virtual DbSet<Fiesta_Store> Fiesta_Store { get; set; }
+        public virtual DbSet<ReportFileUpload> ReportFileUploads { get; set; }
+        public virtual DbSet<Fiesta_EmpStore> Fiesta_EmpStore { get; set; }
+        public virtual DbSet<Fiesta_ExcelCompare> Fiesta_ExcelCompare { get; set; }
+        public virtual DbSet<Fiesta_Report> Fiesta_Report { get; set; }
+        public virtual DbSet<Fiesta_Role> Fiesta_Role { get; set; }
+        public virtual DbSet<Fiesta_State> Fiesta_State { get; set; }
     
         public virtual ObjectResult<ValidateLogin_Result> ValidateLogin(string email, string password)
         {

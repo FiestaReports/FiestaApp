@@ -187,6 +187,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FiestaZohoDatabase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Fiesta_Employee.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fiesta_EmpStates.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fiesta_EmpStore.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fiesta_EmpStoreReport.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fiesta_ExcelCompare.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fiesta_Report.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fiesta_Role.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fiesta_State.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fiesta_Store.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetAllReports_Result.cs">
       <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
     </Compile>
@@ -202,6 +229,9 @@
     <Compile Include="Models\GetStoresByState_Result.cs">
       <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReportFileUpload.cs">
+      <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ValidateLogin_Result.cs">
       <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
     </Compile>
@@ -212,6 +242,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datatables.min.css" />
     <Content Include="Content\navbar-fixed-side.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -251,6 +282,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\datatables.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -293,6 +325,7 @@
     <Content Include="Views\Home\AgentContents.cshtml" />
     <Content Include="Views\Store\ManageStores.cshtml" />
     <Content Include="Views\Employee\ManageEmployee.cshtml" />
+    <Content Include="Views\Store\_Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
