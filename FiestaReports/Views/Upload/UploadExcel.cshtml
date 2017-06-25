@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "Upload Excel";
+}
+
+@section Scripts{
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+}
+<div class="container">
+    <br />
+    <h4><strong>Note:</strong> Upload the Excel files here</h4>
+    <hr />
+    <div class="alert alert-info">
+        <strong>Info!</strong> Upload each report according to their category.
+    </div>
+    @if ((TempData["ExcelMissing_Message"]) != null)
+    {
+        <div class="alert alert-danger" id="ExcelMissing">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>Warning!</strong> @TempData["ExcelMissing_Message"]
+        </div>
+    }
+    @if ((TempData["MessageException"]) != null)
+    {
+        <div class="alert alert-warning" id="MessageException">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>Exception!</strong>  @TempData["MessageException"]
+        </div>
+    }
+    @if ((TempData["RP_Message"]) != null)
+    {
+        <div class="alert alert-success" id="RP_success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>Success! RP Excel</strong> @TempData["RP_Message"]
+        </div>
+    }
+    @if ((TempData["AR_Message"]) != null)
+    {
+        <div class="alert alert-success" id="AR_success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>Success! AR Excel</strong> @TempData["AR_Message"]
+        </div>
+    }
+    @if ((TempData["Recon_Message"]) != null)
+    {
+        <div class="alert alert-success" id="Recon_success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>Success! Recon Excel</strong> @TempData["Recon_Message"]
+        </div>
+    }
+    @if ((TempData["DD_Message"]) != null)
+    {
+        <div class="alert alert-success" id="DD_success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>Success! EOD Excel</strong> @TempData["DD_Message"]
+        </div>
+    }
+    @if ((TempData["Commission_Message"]) != null)
+    {
+        <div class="alert alert-success" id="Commission_success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>Success! Commission Excel</strong> @TempData["Commission_Message"]
+        </div>
+    }
+    @if ((TempData["EFT_Message"]) != null)
+    {
+        <div class="alert alert-success" id="EFT_success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <strong>Success! EFT Excel</strong> @TempData["EFT_Message"]
+        </div>
+
+    }
+    <div class="panel-group" id="accordion">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">RP Excel</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @using (Html.BeginForm("Upload", "Upload", new { nameReport = "RP" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div style="margin-bottom :15px; margin-top: 15px">
+                            <label class="btn btn-default btn-file">
+                                <input type="file" id="file" name="file" style="display:inline-table" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet ">
+                            </label>
+                            <button type="submit" class="btn btn-primary" name="RP" value="Upload">Upload</button>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">AR Excel</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @using (Html.BeginForm("Upload", "Upload", new { nameReport = "AR" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div style="margin-bottom :15px; margin-top: 15px">
+                            <label class="btn btn-default btn-file">
+                                <input type="file" name="file" id="file" style="display:inline-table" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet ">
+                            </label>
+                            <button type="submit" class="btn btn-primary" name="btn_AR" value="Upload">Upload</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"> 
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Recon Excel</a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @using (Html.BeginForm("Upload", "Upload", new { nameReport = "RECON" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div style="margin-bottom :15px; margin-top: 15px">
+                            <label class="btn btn-default btn-file">
+                                <input type="file" name="file" id="file" style="display:inline-table" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet ">
+                            </label>
+                            <button type="submit" class="btn btn-primary" name="btn_Recon" value="Upload">Upload</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">EOD Excel</a>
+                </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @using (Html.BeginForm("Upload", "Upload", new { nameReport = "EOD" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div style="margin-bottom :15px; margin-top: 15px">
+                            <label class="btn btn-default btn-file">
+                                <input type="file" name="file" id="file" style="display:inline-table" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet ">
+                            </label>
+                            <button type="submit" class="btn btn-primary" name="btn_DD">Upload</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Commission Excel</a>
+                </h4>
+            </div>
+            <div id="collapse5" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @using (Html.BeginForm("Upload", "Upload", new { nameReport = "COMMISSION" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div style="margin-bottom :15px; margin-top: 15px">
+                            <label class="btn btn-default btn-file">
+                                <input type="file" name="file" id="file" style="display:inline-table" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet ">
+                            </label>
+                            <button type="submit" class="btn btn-primary" name="btn_Commission">Upload</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">EFT Excel</a>
+                </h4>
+            </div>
+            <div id="collapse6" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @using (Html.BeginForm("Upload", "Upload", new { nameReport = "EFT" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div style="margin-bottom :15px; margin-top: 15px">
+                            <label class="btn btn-default btn-file">
+                                <input type="file" name="file" id="file" style="display:inline-table;" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet ">
+                            </label>
+                            <button type="submit" class="btn btn-primary" name="btn_EFT">Upload</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

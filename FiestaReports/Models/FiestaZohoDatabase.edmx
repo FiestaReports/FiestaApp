@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FiestaZohoDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="AddStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StateId" Type="int" Mode="In" />
+          <Parameter Name="StoreNumber" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="City" Type="varchar" Mode="In" />
+          <Parameter Name="ZipCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteReportsByStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+          <Parameter Name="StoreNo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EmployeeRegistration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LoginUserId" Type="int" Mode="In" />
+          <Parameter Name="RoleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllStates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleId" Type="int" Mode="In" />
+          <Parameter Name="LoginId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeeDetailsByEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetRolesByEmp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetStoresByState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="States" Type="varchar(max)" Mode="In" />
+          <Parameter Name="RoleId" Type="int" Mode="In" />
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+          <Parameter Name="LoginId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertEmployeeDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+          <Parameter Name="States" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Stores" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="InsertEmployeeReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+          <Parameter Name="StoreNo" Type="varchar" Mode="In" />
+          <Parameter Name="ReportId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertEmployeeStates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+          <Parameter Name="States" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="InsertEmployeeStores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+          <Parameter Name="StoreNo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertFileUploads" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FileName" Type="varchar" Mode="In" />
+          <Parameter Name="UploadedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ReportName" Type="varchar" Mode="In" />
+          <Parameter Name="FileGUID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="UpdateEmployeeRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+          <Parameter Name="RoleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ValidateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="FiestaZohoDatabaseModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FiestaZohoDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FiestaZohoDatabaseEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="ValidateLogin" ReturnType="Collection(FiestaZohoDatabaseModel.ValidateLogin_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllStates" ReturnType="Collection(FiestaZohoDatabaseModel.GetAllStates_Result)" >
+            <Parameter Name="RoleId" Mode="In" Type="Int32" />
+            <Parameter Name="LoginId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeeDetailsByEmail" ReturnType="Collection(FiestaZohoDatabaseModel.GetEmployeeDetailsByEmail_Result)">
+          <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetRolesByEmp" ReturnType="Collection(FiestaZohoDatabaseModel.GetRolesByEmp_Result)">
+          <Parameter Name="RoleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertEmployeeStates">
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+            <Parameter Name="States" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertEmployeeStores">
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+            <Parameter Name="StoreNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateEmployeeRole">
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+            <Parameter Name="RoleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllReports" ReturnType="Collection(FiestaZohoDatabaseModel.GetAllReports_Result)" >
+            <Parameter Name="LoginUserId" Mode="In" Type="Int32" />
+            <Parameter Name="RoleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertEmployeeReports">
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+            <Parameter Name="StoreNo" Mode="In" Type="String" />
+            <Parameter Name="ReportId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertFileUploads">
+            <Parameter Name="FileName" Mode="In" Type="String" />
+            <Parameter Name="UploadedBy" Mode="In" Type="String" />
+            <Parameter Name="ReportName" Mode="In" Type="String" />
+            <Parameter Name="FileGUID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetStoresByState" ReturnType="Collection(FiestaZohoDatabaseModel.GetStoresByState_Result)">
+            <Parameter Name="States" Mode="In" Type="String" />
+            <Parameter Name="RoleId" Mode="In" Type="Int32" />
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+            <Parameter Name="LoginId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertEmployeeDetails">
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+            <Parameter Name="States" Mode="In" Type="String" />
+            <Parameter Name="Stores" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EmployeeRegistration" ReturnType="Collection(FiestaZohoDatabaseModel.EmployeeRegistration_Result)">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteReportsByStore">
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+            <Parameter Name="StoreNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddStore" ReturnType="Collection(String)">
+            <Parameter Name="StateId" Mode="In" Type="Int32" />
+            <Parameter Name="StoreNumber" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="ZipCode" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ValidateLogin_Result">
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="201" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+          <Property Type="Int32" Name="EmpId" Nullable="false" />
+          </ComplexType>
+        <ComplexType Name="GetAllStates_Result">
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Value" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeeDetailsByEmail_Result">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="EmpId" Nullable="false" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetRolesByEmp_Result">
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GetAllReports_Result">
+          <Property Type="Int32" Name="ReportId" Nullable="false" />
+          <Property Type="String" Name="ReportName" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GetStoresByState_Result">
+          <Property Type="String" Name="storeNo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Store" Nullable="false" MaxLength="151" />
+        </ComplexType>
+        <ComplexType Name="EmployeeRegistration_Result">
+          <Property Type="Int32" Name="EmpId" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FiestaZohoDatabaseModelStoreContainer" CdmEntityContainer="FiestaZohoDatabaseEntities" >
+          <FunctionImportMapping FunctionImportName="ValidateLogin" FunctionName="FiestaZohoDatabaseModel.Store.ValidateLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FiestaZohoDatabaseModel.ValidateLogin_Result">
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllStates" FunctionName="FiestaZohoDatabaseModel.Store.GetAllStates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FiestaZohoDatabaseModel.GetAllStates_Result">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeeDetailsByEmail" FunctionName="FiestaZohoDatabaseModel.Store.GetEmployeeDetailsByEmail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FiestaZohoDatabaseModel.GetEmployeeDetailsByEmail_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRolesByEmp" FunctionName="FiestaZohoDatabaseModel.Store.GetRolesByEmp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FiestaZohoDatabaseModel.GetRolesByEmp_Result">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertEmployeeStates" FunctionName="FiestaZohoDatabaseModel.Store.InsertEmployeeStates" />
+          <FunctionImportMapping FunctionImportName="InsertEmployeeStores" FunctionName="FiestaZohoDatabaseModel.Store.InsertEmployeeStores" />
+          <FunctionImportMapping FunctionImportName="UpdateEmployeeRole" FunctionName="FiestaZohoDatabaseModel.Store.UpdateEmployeeRole" />
+          <FunctionImportMapping FunctionImportName="GetAllReports" FunctionName="FiestaZohoDatabaseModel.Store.GetAllReports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FiestaZohoDatabaseModel.GetAllReports_Result">
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertEmployeeReports" FunctionName="FiestaZohoDatabaseModel.Store.InsertEmployeeReports" />
+          <FunctionImportMapping FunctionImportName="InsertFileUploads" FunctionName="FiestaZohoDatabaseModel.Store.InsertFileUploads" />
+          <FunctionImportMapping FunctionImportName="GetStoresByState" FunctionName="FiestaZohoDatabaseModel.Store.GetStoresByState">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FiestaZohoDatabaseModel.GetStoresByState_Result">
+                <ScalarProperty Name="storeNo" ColumnName="storeNo" />
+                <ScalarProperty Name="Store" ColumnName="Store" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertEmployeeDetails" FunctionName="FiestaZohoDatabaseModel.Store.InsertEmployeeDetails" />
+          <FunctionImportMapping FunctionImportName="EmployeeRegistration" FunctionName="FiestaZohoDatabaseModel.Store.EmployeeRegistration">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FiestaZohoDatabaseModel.EmployeeRegistration_Result">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteReportsByStore" FunctionName="FiestaZohoDatabaseModel.Store.DeleteReportsByStore" />
+          <FunctionImportMapping FunctionImportName="AddStore" FunctionName="FiestaZohoDatabaseModel.Store.AddStore" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "ManageStores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        /***   Page Load Event ***/
+
+
+        /***   Returns all the States ***/
+        $.ajax({
+            url: "@Url.Action("GetStates", "Account")",
+            dataType: "json",
+            type: "GET",
+            error: function () {
+            },
+            success: function (data) {
+
+                var optionhtml = '<option value="0">Select State</option>';
+                $("#dlStates").append(optionhtml);
+                $.each(data, function (i) {
+
+                    optionhtml = '<option value="' +
+                data[i].Value + '">' + data[i].Text + '</option>';
+                    $("#dlStates").append(optionhtml);
+                });
+            }
+        });
+
+
+        $('#btnSubmit').click(function (e) {
+            /***   Submitting Store details  ***/
+
+            if (ValidateStateInfo()) {
+                var obj = {
+                    StateId: $("#dlStates").val(),
+                    StoreNumber: $("#txtStoreNo").val(),
+                    Address: $("#txtAddress").val(),
+                    City: $("#txtCity").val(),
+                    ZipCode: $("#tztZipCode").val()
+                }
+                console.log(obj);
+                $.ajax({
+                    url: "@Url.Action("AddStore", "Store")",
+                    dataType: "json",
+                    data: obj,
+                    type: "POST",
+                    error: function () {
+                    },
+                    success: function (data) {
+                        if (data != "") {
+                            $("#store_failure").show();
+                            $("#store_success").hide();
+                        }
+                        else {
+                            $("#store_success").show();
+                            $("#store_failure").hide();
+                        }
+
+                    }
+                });
+            }
+
+        });
+    });
+    function ValidateStateInfo() {
+        /***   validating Store submission fields  ***/
+
+        var flag = true;
+        $('#dlStates').removeClass('Red-border');
+        $('#txtStoreNo').removeClass('Red-border');
+        $('#txtCity').removeClass('Red-border');
+        if ($("#dlStates").val() == null || $("#dlStates").val() == "" || $("#dlStates").val() == "0") {
+            flag = false;
+            $('#dlStates').addClass('Red-border');
+        }
+        if ($("#txtStoreNo").val() == "") {
+            flag = false;
+            $('#txtStoreNo').addClass('Red-border');
+        }
+        else if ($("#txtStoreNo").val().length != 3) {
+            flag = false;
+            $('#txtStoreNo').addClass('Red-border');
+        }
+        if ($("#txtCity").val() == "") {
+            flag = false;
+            $('#txtCity').addClass('Red-border');
+        }
+        return flag;
+    }
+</script>
+<div class="container">
+    <h3>Manage stores</h3>
+    <p></p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Add New Store</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <form class="form-inline">
+                        <div>
+                            <label class="sr-only" for="exampleSelect1">select State</label>
+                            <select class="form-control mb-2 mr-sm-2 mb-sm-0" id="dlStates" placeholder="Select State"></select>
+
+                            <label class="sr-only" for="inlineFormInput">Store NUmber</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="txtStoreNo" placeholder="Store Number">
+
+                            <label class="sr-only" for="inlineFormInput">Street Address</label>
+                            <textarea type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="txtAddress" placeholder="Street Address" rows="3"></textarea>
+
+                            <label class="sr-only" for="inlineFormInput">City</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="txtCity" placeholder="City">
+
+                            <label class="sr-only" for="inlineFormInput">Zipcode</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="txtZipCode" placeholder="Zipcode">
+
+                            <button type="button" class="btn btn-primary" id="btnSubmit">Submit</button>
+                        </div>
+                        <div>
+                            <div class="alert alert-danger" id="store_failure" style="display:none">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <strong>Warning!</strong> There is already a store with this store number                           
+                            </div>
+                            <div class="alert alert-success" id="store_success" style="display:none;">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <strong>Success!</strong> Store is added
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Current Stores</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <form style="padding-top:10px">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Firstname</th>
+                                        <th>Lastname</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>John</td>
+                                        <td>Doe</td>
+                                        <td>john@example.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mary</td>
+                                        <td>Moe</td>
+                                        <td>mary@example.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>July</td>
+                                        <td>Dooley</td>
+                                        <td>july@example.com</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
