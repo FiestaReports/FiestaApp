@@ -85,7 +85,9 @@ namespace FiestaReports.Controllers
                 StoreNo = storeNum,
                 Street = store.Address,
                 City = store.City,
-                Zipcode = store.ZipCode
+                Zipcode = store.ZipCode,
+                CreatedDate = DateTime.Now,
+                IsActive = true
             };
             return fStore;
         }
