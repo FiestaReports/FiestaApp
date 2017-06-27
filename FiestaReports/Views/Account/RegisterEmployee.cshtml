@@ -474,9 +474,6 @@
                             @Html.PasswordFor(m => m.confirmpassword, new { @class = "form-control register" })
                         </div>
                     </div>
-
-
-
                     <br />
                     <div class="input-group">
                         <div style="margin-left:470px">
@@ -488,8 +485,6 @@
                     <div>
                         <br />
                     </div>
-
-
                     <div class="alert alert-success" id="dvRSuccess" style="display:none;">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                         <strong>Success!..</strong> <label id="lblRSuccess" style="font: italic"></label>
@@ -498,14 +493,6 @@
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                         <strong>Warning!..</strong> <label id="lblRFailure"></label>
                     </div>
-
-                    @*<div class="form-group success" id="dvRSuccess" style="display:none;">
-                            <label id="lblRSuccess"></label>
-                        </div>
-
-                        <div class="form-group failure" id="dvRFailure" style="display:none;">
-                            <label id="lblRFailure"></label>
-                        </div>*@
                 </form>
             </div>
         </div>
@@ -513,44 +500,12 @@
             <div class="panel-heading"><strong>Assign Store and Role</strong></div>
             <div class="panel-body">
                 <form class="form-horizontal">
-                    @*@using (Html.BeginForm("RegisterEmployee", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {*@
-                    @*<div class="alert alert-info" id="RP_success">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                            <strong>Search the registered employee to assign the store and/or excel reports</strong>
-                        </div>*@
-
-
-                    @*<div class="form-group" style="margin-top:30px">
-                        <label for="role" class="col-md-3 control-label">Search by Email</label>
-
-                        <div class="col-sm-3">
-                            <input type="email" class="form-control" id="emailsearch" placeholder="Enter your email.">
-                            `
-                        </div>
-                        <button type="button" class="btn btn-default" id="btnSearch">
-                            <span class="glyphicon glyphicon-search"></span> Search
-                        </button>
-                    </div>*@
-                    
-                        <div class="form-group">
-                            <label for="lname" class="col-md-3 control-label">Name</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="lnametext" disabled>
-                            </div>
-                        </div>
-                    @*<div class="form-group">
-                        <label for="fname" class="col-md-3 control-label">First Name</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="fnametext" disabled>
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label for="lname" class="col-md-3 control-label">Last Name</label>
+                        <label for="lname" class="col-md-3 control-label">Name</label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" id="lnametext" disabled>
                         </div>
-                    </div>*@
+                    </div>
                     <div class="form-group">
                         <label for="role" class="col-md-3 control-label">Employee Role</label>
 
@@ -604,45 +559,12 @@
             <div class="panel-heading"><strong>Assign Reports</strong></div>
             <div class="panel-body">
                 <form class="form-horizontal">
-                    @*@using (Html.BeginForm("RegisterEmployee", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {*@
-                    @*<div class="alert alert-info" id="RP_success">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                            <strong>Search the registered employee to assign the store and/or excel reports</strong>
-                        </div>*@
-
-
-                    @*<div class="form-group" style="margin-top:30px">
-                        <label for="role" class="col-md-3 control-label">Search by Email</label>
-
-                        <div class="col-sm-3">
-                            <input type="email" class="form-control" id="emailsearch1" placeholder="Enter your email.">
-                            `
-                        </div>
-                        <button type="button" class="btn btn-default" id="btnSearch1">
-                            <span class="glyphicon glyphicon-search"></span> Search
-                        </button>
-                    </div>*@
-                    
-                        <div class="form-group">
-                            <label for="lname" class="col-md-3 control-label">Name</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="lnametext1"disabled>
-                            </div>
-                        </div>
-                    @*<div class="form-group">
-                        <label for="fname" class="col-md-3 control-label">First Name</label>
+                    <div class="form-group">
+                        <label for="lname" class="col-md-3 control-label">Name</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="fnametext1" disabled>
+                            <input type="text" class="form-control" id="lnametext1"disabled>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="lname" class="col-md-3 control-label">Last Name</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="lnametext1" disabled>
-                        </div>
-                    </div>*@
-
                     <div class="form-group">
                         <label for="report" class="col-md-3 control-label">Store</label>
 
@@ -655,25 +577,7 @@
                         <label for="role" class="col-md-3 control-label">Reports Accessble</label>
 
                         <div class="col-md-8" id="dvReports">
-                            @*<label class="checkbox-inline">
-                                    <input type="checkbox" class="cls_Report" value="">AR
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" class="cls_Report" value="">Commission
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="">RP
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="">DD
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="">EFT
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="">Recon
-                                </label>*@
-                            `
+                           
                         </div>
                     </div>
                     <div class="input-group">

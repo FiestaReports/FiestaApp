@@ -326,6 +326,9 @@
     <Content Include="Views\Store\ManageStores.cshtml" />
     <Content Include="Views\Employee\ManageEmployee.cshtml" />
     <Content Include="Views\Store\_Add.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\_EmployeeReports.cshtml" />
+    <Content Include="Views\Employee\_EmployeeRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

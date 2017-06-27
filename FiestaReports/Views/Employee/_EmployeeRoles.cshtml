@@ -1,0 +1,59 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Either Role / Store</h4>
+    </div>
+    <div class="modal-body" style="padding:20px 80px;">
+        <form class="form-horizontal">
+            <div class="form-group">
+                @*<div style="float:left"><div><label for="email">Email</label></div><input type="text" class="form-control" id="lnametext" disabled style="width:300px"></div>*@
+                <div style="float:left; margin-left:150px"><div><label for="fillname">Name</label></div><input type="text" class="form-control" id="lnametext" disabled style="width:300px ;"></div>
+            </div>
+
+            <div class="form-group">
+                <div><label for="role">Employee Role</label></div>
+
+                <div id="dvRoles">
+                </div>
+            </div>
+            <div id="dvSection">
+                <div class="form-group">
+                    <div>
+                        <label for="state">State</label>
+                    </div>
+
+                    <div style="float:left">
+                        <select multiple class="form-control" id="dlStates1" style="height:75px; width:300px"></select>
+                    </div>
+                    <div style="float:left ; width:80px; margin:25px 30px 25px 40px;">
+                        <button type="button" id="btnStNext" style="width:35px" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                        <button type="button" id="btnStPrevious" style="width:35px;" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
+                    </div>
+                    <div style="float:left">
+                        <select multiple class="form-control" id="dlStates2" style="height:75px;  width:300px"></select>
+                        `
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div><label for="report">Store</label></div>
+                    <div style="float:left">
+                        <select multiple class="form-control" id="dlStoresLeft" style="height:150px; width:300px"></select>
+                    </div>
+                    <div style="float:left ; width:80px ; margin:45px 30px 45px 40px;">
+                        <button type="button" id="btnStoNext" style="width:35px;" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                        <button type="button" id="btnStoPrevious" style="width:35px;" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
+                    </div>
+                    <div style="float:left">
+                        <select multiple class="form-control" id="dlStoresRight" style="height:150px; width:300px"></select>
+                        `
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnAssign">Save changes</button>
+    </div>
+</div>
