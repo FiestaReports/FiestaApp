@@ -1,4 +1,5 @@
 ﻿using FiestaReports.Models;
+using FiestaReports.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,10 +42,16 @@ namespace FiestaReports.Controllers
         [HttpGet]
         public ActionResult GetAllEmployees()
         {
-            var query = (from e in db.Fiesta_Employee
-                             join r in db.Fiesta_Role on e.RoleId equals r.RoleId
-                             join es in db.Fiesta_EmpStore on e.EmpId equals es.EmpId
-                             join s in db.Fiesta_Store on es.StoreNo equals s.StoreNo
+            var userRole = int.Parse(Session["UserRole"].ToString());
+            var employeeId = int.Parse(Session["UserID"].ToString());
+            var stores = StoresByUser();
+            var roles = VisibleRoles();
+
+            var query = (from r in roles
+                            join e in db.Fiesta_Employee on r.RoleId equals e.RoleId 
+                             join es in db.Fiesta_EmpStore on e.EmpId equals es.EmpId 
+                             join s in stores on es.StoreNo equals s.StoreNo
+                         where e.RoleId >= userRole
                              select new {
                                  EmpId = e.EmpId,
                                  FirstName = e.FirstName,
@@ -54,12 +61,14 @@ namespace FiestaReports.Controllers
                                  Active = e.IsActive,
                                  EmpStore = s.StoreNo
                              }).ToList();
-
+            
             var employees = query.GroupBy(cc => cc.EmpId).Select(dd => new { EmpId = dd.Key, EmpStore = string.Join(",", dd.Select(ee => ee.EmpStore).ToList()) });
+
 
             var other = (from e in employees
                          join q in query on e.EmpId equals q.EmpId
                          select new {
+                             EmpId = e.EmpId,
                              FirstName = q.FirstName,
                              LastName = q.LastName,
                              Email = q.Email,
@@ -68,8 +77,55 @@ namespace FiestaReports.Controllers
                              Active = q.Active
                          }).Distinct().ToList();
 
+            if(userRole == (int)UserTypeEnum.National)
+            {
+                var nationals = (from r in db.Fiesta_Role
+                                 join e in db.Fiesta_Employee on r.RoleId equals e.RoleId
+                                 where e.RoleId == userRole
+                                 select new
+                                 {
+                                     EmpId = e.EmpId,
+                                     FirstName = e.FirstName,
+                                     LastName = e.LastName,
+                                     Email = e.EmailAddress,
+                                     Role = r.RoleName,
+                                     EmpStore = "ALL",
+                                     Active = e.IsActive
 
-            return Json(other, JsonRequestBehavior.AllowGet);
+                                 }).ToList();
+                other.AddRange(nationals);
+            }
+
+            return Json(other.OrderBy(x=> x.FirstName).ThenBy(x=> x.LastName), JsonRequestBehavior.AllowGet);
+        }
+
+
+        private IQueryable<Fiesta_Store> StoresByUser()
+        {
+            var userRole = int.Parse(Session["UserRole"].ToString());
+            var employeeId = int.Parse(Session["UserID"].ToString());
+
+            if(userRole == (int)UserTypeEnum.National)
+            {
+                return db.Fiesta_Store;
+            }
+
+            return (from s in db.Fiesta_Store
+                         join es in db.Fiesta_EmpStore on s.StoreNo equals es.StoreNo
+                         where es.EmpId == employeeId
+                         select s);
+        }
+
+        private IQueryable<Fiesta_Role> VisibleRoles()
+        {
+            var userRole = int.Parse(Session["UserRole"].ToString());
+
+            if(userRole == (int)UserTypeEnum.Manager)
+            {
+                return db.Fiesta_Role.Where(x => x.RoleId == (int)UserTypeEnum.Agent);
+            }
+
+            return db.Fiesta_Role;
         }
     }
 }

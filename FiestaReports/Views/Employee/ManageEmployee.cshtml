@@ -322,6 +322,7 @@
                     dataSrc: ''
                 },
                 columns: [
+                    { data: 'EmpId', "visible": false, "orderData": [1, 2] },
                     { data: 'FirstName' },
                     { data: 'LastName' },
                     { data: 'Email' },
@@ -558,7 +559,7 @@
                             <form style="padding-top:10px">
                                 <table id="employees" class="table table-bordered">
                                     <thead>
-                                        <tr>
+                                        <tr><th></th>
                                             <th>Firstname</th>
                                             <th>Lastname</th>
                                             <th>Email</th>

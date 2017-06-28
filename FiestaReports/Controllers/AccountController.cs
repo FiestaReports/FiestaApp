@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Text;
 using FiestaReports.FiestaDTO;
 using System.Data.Entity.Validation;
+using FiestaReports.Utils;
 
 namespace FiestaReports.Controllers
 {
@@ -34,14 +35,14 @@ namespace FiestaReports.Controllers
             if (Session["UserName"] != null)
             {
               int RoleId = Convert.ToInt32(Session["UserRole"]);
-                if (RoleId == 1)
+                if (RoleId == (int)UserTypeEnum.National)
                 { return RedirectToAction("NationalContents", "Home"); }
-                else if (RoleId == 2)
+                else if (RoleId == (int)UserTypeEnum.Owner)
                 { return RedirectToAction("SecondLevelContents", "Home"); }
-                else if (RoleId == 4)
+                else if (RoleId == (int)UserTypeEnum.Agent)
                 { return RedirectToAction("AgentContents", "Home"); }
                 else
-                { return RedirectToAction("AgentContents", "Home"); }
+                { return RedirectToAction("SecondLevelContents", "Home"); }
             }
             else
             return View();
