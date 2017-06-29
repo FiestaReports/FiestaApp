@@ -330,6 +330,7 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\_EmployeeReports.cshtml" />
     <Content Include="Views\Employee\_EmployeeRoles.cshtml" />
+    <Content Include="Views\Employee\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

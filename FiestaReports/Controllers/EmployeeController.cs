@@ -99,6 +99,41 @@ namespace FiestaReports.Controllers
             return Json(other.OrderBy(x=> x.FirstName).ThenBy(x=> x.LastName), JsonRequestBehavior.AllowGet);
         }
 
+        [AuthorizationFilter]
+        [HttpGet]
+        public PartialViewResult _Edit(int id)
+        {
+            var model = db.Fiesta_Employee.FirstOrDefault(x => x.EmpId == id);
+            if (model == null) { 
+                model = new Fiesta_Employee();
+                ViewBag.Message = "No data available";
+            }
+
+            return PartialView(model);
+        }
+
+        [AuthorizationFilter]
+        [HttpPost]
+        public ActionResult _Edit(Fiesta_Employee model)
+        {
+            
+            return null;
+        }
+
+        [AuthorizationFilter]
+        [HttpGet]
+        public ActionResult _EmployeeReports(int id)
+        {
+            var model = db.Fiesta_Employee.FirstOrDefault(x => x.EmpId == id);
+            if (model == null)
+            {
+                model = new Fiesta_Employee();
+                ViewBag.Message = "No data available";
+            }
+
+            return View();
+        }
+
 
         private IQueryable<Fiesta_Store> StoresByUser()
         {
