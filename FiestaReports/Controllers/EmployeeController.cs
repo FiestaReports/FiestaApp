@@ -3,6 +3,8 @@ using FiestaReports.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -116,9 +118,48 @@ namespace FiestaReports.Controllers
         [HttpPost]
         public ActionResult _Edit(Fiesta_Employee model)
         {
+            bool modelIsValid = true;
+            if (string.IsNullOrEmpty(model.FirstName))
+            {
+                ModelState.AddModelError("FirstName", "Required");
+                modelIsValid = false;
+            }
+            if(string.IsNullOrEmpty(model.LastName))
+            {
+                ModelState.AddModelError("LastName", "Required");
+                modelIsValid = false;
+            }
+                
+            if (modelIsValid)
+            {
+                var original = db.Fiesta_Employee.FirstOrDefault(x => x.EmpId == model.EmpId);
+                original.FirstName = model.FirstName;
+                original.LastName = model.LastName;
+                original.EmailAddress = model.EmailAddress;
+                original.IsActive = model.IsActive;
+                original.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
             
-            return null;
+            return PartialView(model);
         }
+        
+        [AuthorizationFilter]
+        [HttpPost]
+        public ActionResult _EditPassword(string pass, int empId)
+        {
+            string encryptedPassword = Convert.ToBase64String(System.Security.Cryptography.SHA256.Create()
+                                    .ComputeHash(Encoding.UTF8.GetBytes(pass)));
+
+            var original = db.Fiesta_Employee.FirstOrDefault(x => x.EmpId == empId);
+            original.Password = encryptedPassword;
+            original.ModifiedDate = DateTime.Now;
+            db.SaveChanges();
+            return Json("Success", JsonRequestBehavior.AllowGet);
+        }
+
 
         [AuthorizationFilter]
         [HttpGet]
@@ -162,5 +203,6 @@ namespace FiestaReports.Controllers
 
             return db.Fiesta_Role;
         }
+        
     }
 }
