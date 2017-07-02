@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-4">
                         <select multiple size="6" class="form-control" id="ddlTakenStores"></select>
-                        `
+                        
                     </div>
                 </div>
             </div>
@@ -241,7 +241,7 @@
         };
     };
 
-    function MoveStoreToRight() {
+    function AddStore() {
         var selectedOpts = $('#ddlAvailableStores option:selected');
         if (selectedOpts.length > 0) {
             $('#ddlTakenStores').append($(selectedOpts).clone());
@@ -250,7 +250,7 @@
         }
     };
 
-    function MoveStoreToLeft() {
+    function RemoveStore() {
         var selectedOpts = $('#ddlTakenStores option:selected');
         if (selectedOpts.length > 0) {
             $('#ddlAvailableStores').append($(selectedOpts).clone());
@@ -369,19 +369,19 @@
     });
 
     $("#btnAddStore").click(function () {
-        MoveStoreToRight();
+        AddStore();
     });
 
     $('#btnStoPrevious').click(function (e) {
-        MoveStoreToLeft();
+        RemoveStore();
     });
 
     $("#ddlAvailableStores").on("dblclick", function () {
-        MoveStoreToRight();
+        AddStore();
     });
 
     $("#ddlTakenStores").on("dblclick", function () {
-        MoveStoreToLeft();
+        RemoveStore();
     });
 
 });

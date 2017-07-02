@@ -252,7 +252,6 @@
                         States: str_States,
                         Stores: str_Stores
                     }
-                    console.log(obj);
                     $.ajax({
                         url: "@Url.Action("AssignEmployee", "Account")",
                         data: obj,
@@ -296,16 +295,12 @@
                     }
 
                 });
-                console.log(EmpId);
-                console.log($("#dlStores1").val());
-                console.log(Reports);
                 if (EmpId > 0 && $("#dlStores1").val() != '' && Reports.length > 0) {
                     var obj = {
                         EmployeeId: EmpId,
                         lstStores: $("#dlStores1").val(),
                         lstReports: Reports
                     }
-                    console.log(obj);
                     $.ajax({
                         url: "@Url.Action("AssignReports", "Account")",
                         data: obj,
@@ -383,7 +378,6 @@
                         EmpId: 0,
                         States: $(this).val()
                     }
-                    console.log(obj);
                     $.ajax({
                         url: "@Url.Action("GetStores", "Account")",
                         dataType: "json",
@@ -446,7 +440,6 @@
                     EmpId: EmpId,
                     States: str_States
                 }
-                console.log(obj);
                 $.ajax({
                     url: "@Url.Action("GetStores", "Account")",
                     dataType: "json",
@@ -465,7 +458,6 @@
                         });
                         if (flag == 1) {
                             $("#dlStoresRight").html('');
-                            console.log(objdata.lstStores);
                             if (objdata.lstStores != null) {
                                 $.each(objdata.lstStores, function (i) {
 
