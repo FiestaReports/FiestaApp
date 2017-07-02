@@ -350,7 +350,7 @@
                     }, {
                         data: 'EmpId',
                         render: function (data, type, full, meta) {
-                            return '<a href="javascript:EditUser(' + data + ')">Manage reports</a>';
+                            return '<a href="javascript:ManageReports(' + data + ')">Manage reports</a>';
                         }
                     }
                 ]
@@ -541,6 +541,19 @@
             });
         };
 
+        function ManageReports(empId) {
+            $.ajax({
+                url: '@Url.Action("_EmployeeReports", "Employee")',
+                type: 'GET',
+                data: { id: empId },
+                success: function (result) {
+                    $("#employeeReports").html(result);
+                    $("#empReportsModal").modal();
+
+                }
+            });
+        };
+
     </script>
 </head>
 
@@ -634,19 +647,17 @@
             <div class="modal-dialog modal-lg">
                 <!-- Modal content-->
                 <div class="col-md-12" id="employeeStores">
-
                 </div>
-
             </div>
         </div>
 
 
         @*This is the modal to edit Reports assigned to each Employee*@
-        <div class="modal fade" id="myModalReport" role="dialog">
-            <div class="modal-dialog">
-
+        <div class="modal fade" id="empReportsModal" role="dialog">
+            <div class="modal-dialog modal-lg">
                 <!-- Modal content-->
-
+                <div class="col-md-12" id="employeeReports">
+                </div>
             </div>
         </div>
 
@@ -660,7 +671,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="step2">
+        <div class="modal fade" id="step2" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header" id="headerStores"><strong>Assign Store and Role</strong></div>
@@ -763,10 +774,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="step4">
+    <div class="modal fade" id="step4" role="dialog">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content col-md-8" id="editEmployee">
-
+            <!-- Modal content-->
+            <div class="col-md-12" id="editEmployee">
             </div>
         </div>
     </div>

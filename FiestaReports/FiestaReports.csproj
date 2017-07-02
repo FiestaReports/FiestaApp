@@ -172,6 +172,7 @@
     <Compile Include="Models\EmployeeRegistration_Result.cs">
       <DependentUpon>FiestaZohoDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeReports.cs" />
     <Compile Include="Models\FiestaZohoDatabase.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

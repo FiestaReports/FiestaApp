@@ -1,120 +1,124 @@
 ﻿
 @model FiestaReports.Models.Fiesta_Employee
-
-<div class="modal-body">
-    <div id="tabs">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#tab-1">User info</a></li>
-            <li><a data-toggle="tab" href="#tab-2">Password</a></li>
-        </ul>
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit user information</h4>
     </div>
-    <div class="tab-content">
-        <div id="tab-1" class="tab-pane fade in active">
-        @using (Html.BeginForm("_Edit", "Employee", FormMethod.Post, new { @Id = "frmEditEmployee"}))
-        {
-                @Html.AntiForgeryToken()
-            bool hasValue = string.IsNullOrEmpty(ViewBag.Message);
-            bool isActive = Model.IsActive.HasValue ? Model.IsActive.Value == true ? true : false : false;
+    <div class="modal-body">
+        <div id="tabs">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-1">User info</a></li>
+                <li><a data-toggle="tab" href="#tab-2">Password</a></li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade in active">
+                @using (Html.BeginForm("_Edit", "Employee", FormMethod.Post, new { @Id = "frmEditEmployee" }))
+                {
+                    @Html.AntiForgeryToken()
+                    bool hasValue = string.IsNullOrEmpty(ViewBag.Message);
+                    bool isActive = Model.IsActive.HasValue ? Model.IsActive.Value == true ? true : false : false;
 
-                <div class="form-horizontal">
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.EmpId, new { @id = "employeeId" })
-                    @{if (!hasValue)
-                    {
-                        <span class="text-danger">There is something wrong, try again later.</span>
-                    }
-                    }
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FirstName, "Firstname", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control editUser" } })
-                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.EmpId, new { @id = "employeeId" })
+                        @{if (!hasValue)
+                            {
+                                <span class="text-danger">There is something wrong, try again later.</span>
+                            }
+                        }
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirstName, "Firstname", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control editUser" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.LastName, "Lastname", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control editUser" } })
-                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastName, "Lastname", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control editUser" } })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.EmailAddress, "Email", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control editUser" } })
-                            @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EmailAddress, "Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control editUser" } })
+                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.IsActive,"Is active", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBox("chkIsActive", isActive)
-                                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsActive, "Is active", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBox("chkIsActive", isActive)
+                                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @{if (hasValue)
+                                    {
+                                        <input type="button" id="btnEditUser" value="Save" class="btn btn-primary" />
+                                    }
+                                }
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            @{if (hasValue)
-                            {
-                                <input type="button" id="btnEditUser"  value="Save" class="btn btn-primary" />
-                                }
-                            }
+                                    }
+            </div>
+            <div id="tab-2" class="tab-pane fade">
+                @using (Html.BeginForm("_EditPassword", "Employee", FormMethod.Post, new { @Id = "frmResetPasswor" }))
+                {
+                    <div class="form-horizontal">
+                        <hr />
+                        <div class="form-group">
+                            @Html.Label("lblPassword", "Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.Password("txtPassword", "", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("lblConfirmPass", "Confirm password", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.Password("txtConfirmPass", "", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10 text-center">
+                                <strong> Password has to be minimum 5 characters in length.</strong>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="button" id="btnResetPass" value="Reset password" class="btn btn-primary" />
+                            </div>
                         </div>
                     </div>
-                </div>
-
-        }
-        </div>
-        <div id="tab-2" class="tab-pane fade">
-        @using (Html.BeginForm("_EditPassword", "Employee", FormMethod.Post, new { @Id = "frmResetPasswor" }))
-        {
-            <div class="form-horizontal">
-                <hr/>
-                <div class="form-group">
-                    @Html.Label("lblPassword", "Password", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.Password("txtPassword", "", new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.Label("lblConfirmPass", "Confirm password", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.Password("txtConfirmPass", "", new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10 text-center">
-                        <strong> Password has to be minimum 5 characters in length.</strong>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="button" id="btnResetPass" value="Reset password" class="btn btn-primary" />
-                    </div>
-                </div>
+                }
             </div>
-        }
         </div>
     </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+
 </div>
-
-<div class="modal-footer">
-    @Html.ActionLink("Back to List", "ManageEmployee")
-</div>
-
-
     <script type="text/javascript">
         function ValidateUser() {
             var flag = true;
@@ -158,7 +162,7 @@
         };
 
      $(document).ready( function (){
-        
+
 
          $("#btnEditUser").click(function (event) {
                if (ValidateUser()){
@@ -186,7 +190,7 @@
 
          $('#btnResetPass').click(function (event) {
              if(ValidatePassword() && confirm("You are about to update the password, Do you want to continue?")) {
-                 
+
                  $.ajax({
                      url: "@Url.Action("_EditPassword", "Employee")",
                      data: { pass: $("#txtPassword").val(), empId: $("#employeeId").val() },

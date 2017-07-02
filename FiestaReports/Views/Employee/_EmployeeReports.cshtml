@@ -3,24 +3,20 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Edit Reports Assigned</h4>
     </div>
-    <div class="modal-body" style="padding:20px 80px;">
+    <div class="modal-body">
         <form class="form-horizontal">
-            @*<div class="form-group">
-                    <div style="float:left"><div><label for="email">Email</label></div><input type="text" class="form-control" id="lnametext" disabled style="width:300px"></div>
-                </div>*@
             <div class="form-group">
-                <div style="float:left;"><div><label for="fillname">Name</label></div><input type="text" class="form-control" id="lnametext1" disabled style="width:300px ;"></div>
-            </div>
-            <div class="form-group">
-                <div style="float:left">
-                    <div><label for="report">Store</label></div>
-                    <div><select multiple class="form-control" id="dlStores1" style="height:75px; width:300px"></select></div>
+                <div class="col-md-1 col-md-offset-1">
+                    <label for="fillname">Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control col-md-2" id="txtFullName" disabled="disabled">
                 </div>
             </div>
             <div class="form-group">
-                <div style="float:left">
-                    <div><label for="role">Reports Accessble</label></div>
-                    <div id="dvReports"></div>
+                <div class="col-md-4">
+                    <div><label for="report">Store</label></div>
+                    
                 </div>
             </div>
         </form>

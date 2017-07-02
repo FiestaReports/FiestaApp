@@ -178,7 +178,7 @@ namespace FiestaReports.Controllers
                 model = new Fiesta_Employee();
                 ViewBag.Message = "No data available";
             }
-
+            
             return PartialView(model);
         }
 
@@ -194,7 +194,8 @@ namespace FiestaReports.Controllers
                 ViewBag.Message = "No data available";
             }
 
-            return View();
+            var test = ReportsByEmployee(id);
+            return PartialView(model);
         }
 
 
@@ -226,5 +227,43 @@ namespace FiestaReports.Controllers
             return db.Fiesta_Role;
         }
         
+        private List<EmployeeReports>ReportsByEmployee(int empId)
+        {
+            var storesByEmployee = (from e in db.Fiesta_Employee
+                                    join es in db.Fiesta_EmpStore on e.EmpId equals es.EmpId
+                                    join s in db.Fiesta_Store on es.StoreNo equals s.StoreNo
+                                    where e.EmpId == empId
+                                    select s);
+
+            var reportsByLogedUser = ReportsByLogedUser();
+
+            var test = (from s in storesByEmployee
+                        join esr in db.Fiesta_EmpStoreReport on s.StoreNo equals esr.StoreNo into group1
+                        from g1 in group1.DefaultIfEmpty()
+                        join ru in reportsByLogedUser on g1.ReportId equals ru.ReportId 
+                        select g1).ToList();
+
+
+
+
+            return new List<EmployeeReports>();
+        }
+
+        private IQueryable<Fiesta_Report> ReportsByLogedUser()
+        {
+            var userId = int.Parse(Session["UserID"].ToString());
+            var userRole = int.Parse(Session["UserRole"].ToString());
+
+            if(userRole == (int)UserTypeEnum.National)
+            {
+                return db.Fiesta_Report.Where(x => x.ReportId != 7);
+            }
+
+            return (from r in db.Fiesta_Report
+                    join est in db.Fiesta_EmpStoreReport on r.ReportId equals est.ReportId
+                    where est.EmpId == userId &&
+                    est.ReportId != 7 //FROM DB
+                    select r);
+        }
     }
 }
