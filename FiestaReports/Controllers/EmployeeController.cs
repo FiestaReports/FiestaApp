@@ -103,6 +103,14 @@ namespace FiestaReports.Controllers
 
         [AuthorizationFilter]
         [HttpGet]
+        public ActionResult GetEmployee(int id)
+        {
+            var result = db.Fiesta_Employee.FirstOrDefault(x => x.EmpId == id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+       [AuthorizationFilter]
+        [HttpGet]
         public PartialViewResult _Edit(int id)
         {
             var model = db.Fiesta_Employee.FirstOrDefault(x => x.EmpId == id);
@@ -158,6 +166,20 @@ namespace FiestaReports.Controllers
             original.ModifiedDate = DateTime.Now;
             db.SaveChanges();
             return Json("Success", JsonRequestBehavior.AllowGet);
+        }
+
+        [AuthorizationFilter]
+        [HttpGet]
+        public ActionResult _EmployeeStores(int id)
+        {
+            var model = db.Fiesta_Employee.FirstOrDefault(x => x.EmpId == id);
+            if (model == null)
+            {
+                model = new Fiesta_Employee();
+                ViewBag.Message = "No data available";
+            }
+
+            return PartialView(model);
         }
 
 
