@@ -10,48 +10,52 @@
     <div class="modal-body" >
         <form class="form-horizontal">
             <div class="form-group">
-                <div style="float:left; margin-left:150px">
-                    <div><label for="fillname">Name</label></div>
-                    <input type="text" class="form-control" id="txtFullName" disabled style="width:300px ;">
+                <div class="col-md-1 col-md-offset-1">
+                    <label for="fillname">Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control col-md-2" id="txtFullName" disabled="disabled">
                 </div>
             </div>
 
             <div class="form-group">
-                <div><label for="role" class="col-md-3 control-label">Employee Role</label></div>
+                <div class="col-md-2 text-right">
+                    <label for="role" class="control-label">Employee Role</label></div>
 
-                <div id="divRoles">
+                <div id="divRoles" class="col-md-9">
                 </div>
             </div>
             <div id="statesAssignment">
-                <div class="form-group">
-                    <div>
-                        <label for="state" class="col-md-3 control-label">State</label>
+                <div class="form-group row">
+                    <div class="col-md-1 col-md-offset-1">
+                        <label for="state" class="control-label">State</label>
                     </div>
 
-                    <div class="col-md-3">
-                        <select multiple class="form-control" id="ddlAvailableStates" style="height:75px; width:300px"></select>
+                    <div class="col-md-4">
+                        <select multiple size="6" class="form-control" id="ddlAvailableStates"></select>
                     </div>
                     <div class="col-md-1">
                         <button type="button" id="btnAddState" style="width:35px" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
                         <button type="button" id="btnRemoveState" style="width:35px;" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
                     </div>
-                    <div class="col-md-3">
-                        <select multiple class="form-control" id="ddlTakenStates" style="height:75px;  width:300px"></select>
+                    <div class="col-md-4">
+                        <select multiple size="6" class="form-control" id="ddlTakenStates"></select>
                         `
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div><label for="report" class="col-md-3 control-label">Store</label></div>
-                    <div class="col-md-3">
-                        <select multiple class="form-control" id="ddlAvailableStores" style="height:150px; width:300px"></select>
+                    <div class="col-md-1 col-md-offset-1">
+                    <label for="report" class="control-label">Store</label></div>
+                    <div class="col-md-4">
+                        <select multiple size="6" class="form-control" id="ddlAvailableStores"></select>
                     </div>
                     <div class="col-md-1">
                         <button type="button" id="btnAddStore" style="width:35px;" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
                         <button type="button" id="btnStoPrevious" style="width:35px;" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
                     </div>
-                    <div class="col-md-3">
-                        <select multiple class="form-control" id="ddlTakenStores" style="height:150px; width:300px"></select>
+                    <div class="col-md-4">
+                        <select multiple size="6" class="form-control" id="ddlTakenStores"></select>
                         `
                     </div>
                 </div>
