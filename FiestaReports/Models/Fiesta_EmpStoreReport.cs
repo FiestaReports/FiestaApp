@@ -19,5 +19,9 @@ namespace FiestaReports.Models
         public string StoreNo { get; set; }
         public int ReportId { get; set; }
         public Nullable<System.DateTime> AssignDate { get; set; }
+    
+        public virtual Fiesta_Employee Fiesta_Employee { get; set; }
+        public virtual Fiesta_Report Fiesta_Report { get; set; }
+        public virtual Fiesta_Store Fiesta_Store { get; set; }
     }
 }

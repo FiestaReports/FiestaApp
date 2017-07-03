@@ -113,6 +113,90 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
           <Property Name="StateName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StateCode" Type="varchar" MaxLength="3" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Fiesta_EmpStates_Fiesta_Employee">
+          <End Role="Fiesta_Employee" Type="Self.Fiesta_Employee" Multiplicity="1" />
+          <End Role="Fiesta_EmpStates" Type="Self.Fiesta_EmpStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStates">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStates_Fiesta_State">
+          <End Role="Fiesta_State" Type="Self.Fiesta_State" Multiplicity="1" />
+          <End Role="Fiesta_EmpStates" Type="Self.Fiesta_EmpStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStates">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStore_Fiesta_Employee">
+          <End Role="Fiesta_Employee" Type="Self.Fiesta_Employee" Multiplicity="1" />
+          <End Role="Fiesta_EmpStore" Type="Self.Fiesta_EmpStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStore">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStore_Fiesta_Store">
+          <End Role="Fiesta_Store" Type="Self.Fiesta_Store" Multiplicity="1" />
+          <End Role="Fiesta_EmpStore" Type="Self.Fiesta_EmpStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Store">
+              <PropertyRef Name="StoreNo" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStore">
+              <PropertyRef Name="StoreNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStoreReport_Fiesta_Employee">
+          <End Role="Fiesta_Employee" Type="Self.Fiesta_Employee" Multiplicity="1" />
+          <End Role="Fiesta_EmpStoreReport" Type="Self.Fiesta_EmpStoreReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStoreReport">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStoreReport_Fiesta_Report">
+          <End Role="Fiesta_Report" Type="Self.Fiesta_Report" Multiplicity="1" />
+          <End Role="Fiesta_EmpStoreReport" Type="Self.Fiesta_EmpStoreReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Report">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStoreReport">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStoreReport_Fiesta_Store">
+          <End Role="Fiesta_Store" Type="Self.Fiesta_Store" Multiplicity="1" />
+          <End Role="Fiesta_EmpStoreReport" Type="Self.Fiesta_EmpStoreReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Store">
+              <PropertyRef Name="StoreNo" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStoreReport">
+              <PropertyRef Name="StoreNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="AddStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StateId" Type="int" Mode="In" />
           <Parameter Name="StoreNumber" Type="varchar" Mode="In" />
@@ -207,6 +291,34 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
     [Fiesta_ExcelCompare].[IsActive] AS [IsActive]
     FROM [dbo].[Fiesta_ExcelCompare] AS [Fiesta_ExcelCompare]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Fiesta_EmpStates_Fiesta_Employee" Association="Self.FK_Fiesta_EmpStates_Fiesta_Employee">
+            <End Role="Fiesta_Employee" EntitySet="Fiesta_Employee" />
+            <End Role="Fiesta_EmpStates" EntitySet="Fiesta_EmpStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStates_Fiesta_State" Association="Self.FK_Fiesta_EmpStates_Fiesta_State">
+            <End Role="Fiesta_State" EntitySet="Fiesta_State" />
+            <End Role="Fiesta_EmpStates" EntitySet="Fiesta_EmpStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStore_Fiesta_Employee" Association="Self.FK_Fiesta_EmpStore_Fiesta_Employee">
+            <End Role="Fiesta_Employee" EntitySet="Fiesta_Employee" />
+            <End Role="Fiesta_EmpStore" EntitySet="Fiesta_EmpStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStore_Fiesta_Store" Association="Self.FK_Fiesta_EmpStore_Fiesta_Store">
+            <End Role="Fiesta_Store" EntitySet="Fiesta_Store" />
+            <End Role="Fiesta_EmpStore" EntitySet="Fiesta_EmpStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStoreReport_Fiesta_Employee" Association="Self.FK_Fiesta_EmpStoreReport_Fiesta_Employee">
+            <End Role="Fiesta_Employee" EntitySet="Fiesta_Employee" />
+            <End Role="Fiesta_EmpStoreReport" EntitySet="Fiesta_EmpStoreReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStoreReport_Fiesta_Report" Association="Self.FK_Fiesta_EmpStoreReport_Fiesta_Report">
+            <End Role="Fiesta_Report" EntitySet="Fiesta_Report" />
+            <End Role="Fiesta_EmpStoreReport" EntitySet="Fiesta_EmpStoreReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStoreReport_Fiesta_Store" Association="Self.FK_Fiesta_EmpStoreReport_Fiesta_Store">
+            <End Role="Fiesta_Store" EntitySet="Fiesta_Store" />
+            <End Role="Fiesta_EmpStoreReport" EntitySet="Fiesta_EmpStoreReport" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -292,6 +404,34 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
           <EntitySet Name="Fiesta_Report" EntityType="FiestaZohoDatabaseModel.Fiesta_Report" />
           <EntitySet Name="Fiesta_Role" EntityType="FiestaZohoDatabaseModel.Fiesta_Role" />
           <EntitySet Name="Fiesta_State" EntityType="FiestaZohoDatabaseModel.Fiesta_State" />
+          <AssociationSet Name="FK_Fiesta_EmpStates_Fiesta_Employee" Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStates_Fiesta_Employee">
+            <End Role="Fiesta_Employee" EntitySet="Fiesta_Employee" />
+            <End Role="Fiesta_EmpStates" EntitySet="Fiesta_EmpStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStore_Fiesta_Employee" Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStore_Fiesta_Employee">
+            <End Role="Fiesta_Employee" EntitySet="Fiesta_Employee" />
+            <End Role="Fiesta_EmpStore" EntitySet="Fiesta_EmpStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStoreReport_Fiesta_Employee" Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Employee">
+            <End Role="Fiesta_Employee" EntitySet="Fiesta_Employee" />
+            <End Role="Fiesta_EmpStoreReport" EntitySet="Fiesta_EmpStoreReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStates_Fiesta_State" Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStates_Fiesta_State">
+            <End Role="Fiesta_State" EntitySet="Fiesta_State" />
+            <End Role="Fiesta_EmpStates" EntitySet="Fiesta_EmpStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStoreReport_Fiesta_Report" Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Report">
+            <End Role="Fiesta_Report" EntitySet="Fiesta_Report" />
+            <End Role="Fiesta_EmpStoreReport" EntitySet="Fiesta_EmpStoreReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStoreReport_Fiesta_Store" Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Store">
+            <End Role="Fiesta_Store" EntitySet="Fiesta_Store" />
+            <End Role="Fiesta_EmpStoreReport" EntitySet="Fiesta_EmpStoreReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fiesta_EmpStore_Fiesta_Store" Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStore_Fiesta_Store">
+            <End Role="Fiesta_Store" EntitySet="Fiesta_Store" />
+            <End Role="Fiesta_EmpStore" EntitySet="Fiesta_EmpStore" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ValidateLogin_Result">
           <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="201" />
@@ -341,6 +481,9 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Reset" Type="Boolean" />
           <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Fiesta_EmpStates" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStates_Fiesta_Employee" FromRole="Fiesta_Employee" ToRole="Fiesta_EmpStates" />
+          <NavigationProperty Name="Fiesta_EmpStore" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStore_Fiesta_Employee" FromRole="Fiesta_Employee" ToRole="Fiesta_EmpStore" />
+          <NavigationProperty Name="Fiesta_EmpStoreReport" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Employee" FromRole="Fiesta_Employee" ToRole="Fiesta_EmpStoreReport" />
         </EntityType>
         <EntityType Name="Fiesta_EmpStates">
           <Key>
@@ -350,6 +493,8 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
           <Property Name="EmpId" Type="Int32" Nullable="false" />
           <Property Name="StateId" Type="Int32" Nullable="false" />
           <Property Name="AssignDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Fiesta_Employee" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStates_Fiesta_Employee" FromRole="Fiesta_EmpStates" ToRole="Fiesta_Employee" />
+          <NavigationProperty Name="Fiesta_State" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStates_Fiesta_State" FromRole="Fiesta_EmpStates" ToRole="Fiesta_State" />
         </EntityType>
         <EntityType Name="Fiesta_EmpStoreReport">
           <Key>
@@ -360,6 +505,9 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
           <Property Name="StoreNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ReportId" Type="Int32" Nullable="false" />
           <Property Name="AssignDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Fiesta_Employee" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Employee" FromRole="Fiesta_EmpStoreReport" ToRole="Fiesta_Employee" />
+          <NavigationProperty Name="Fiesta_Report" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Report" FromRole="Fiesta_EmpStoreReport" ToRole="Fiesta_Report" />
+          <NavigationProperty Name="Fiesta_Store" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Store" FromRole="Fiesta_EmpStoreReport" ToRole="Fiesta_Store" />
         </EntityType>
         <EntityType Name="Fiesta_Store">
           <Key>
@@ -373,6 +521,8 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Fiesta_EmpStoreReport" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Store" FromRole="Fiesta_Store" ToRole="Fiesta_EmpStoreReport" />
+          <NavigationProperty Name="Fiesta_EmpStore" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStore_Fiesta_Store" FromRole="Fiesta_Store" ToRole="Fiesta_EmpStore" />
         </EntityType>
         <EntityType Name="ReportFileUpload">
           <Key>
@@ -394,6 +544,8 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
           <Property Name="EmpId" Type="Int32" Nullable="false" />
           <Property Name="StoreNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AssignDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Fiesta_Employee" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStore_Fiesta_Employee" FromRole="Fiesta_EmpStore" ToRole="Fiesta_Employee" />
+          <NavigationProperty Name="Fiesta_Store" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStore_Fiesta_Store" FromRole="Fiesta_EmpStore" ToRole="Fiesta_Store" />
         </EntityType>
         <EntityType Name="Fiesta_ExcelCompare">
           <Key>
@@ -415,6 +567,7 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
           </Key>
           <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ReportName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Fiesta_EmpStoreReport" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Report" FromRole="Fiesta_Report" ToRole="Fiesta_EmpStoreReport" />
         </EntityType>
         <EntityType Name="Fiesta_Role">
           <Key>
@@ -430,7 +583,92 @@ warning 6002: The table/view 'FiestaZohoDB.dbo.Fiesta_ExcelCompare' does not hav
           <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StateCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Fiesta_EmpStates" Relationship="FiestaZohoDatabaseModel.FK_Fiesta_EmpStates_Fiesta_State" FromRole="Fiesta_State" ToRole="Fiesta_EmpStates" />
         </EntityType>
+        <Association Name="FK_Fiesta_EmpStates_Fiesta_Employee">
+          <End Type="FiestaZohoDatabaseModel.Fiesta_Employee" Role="Fiesta_Employee" Multiplicity="1" />
+          <End Type="FiestaZohoDatabaseModel.Fiesta_EmpStates" Role="Fiesta_EmpStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStates">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStore_Fiesta_Employee">
+          <End Type="FiestaZohoDatabaseModel.Fiesta_Employee" Role="Fiesta_Employee" Multiplicity="1" />
+          <End Type="FiestaZohoDatabaseModel.Fiesta_EmpStore" Role="Fiesta_EmpStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStore">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStoreReport_Fiesta_Employee">
+          <End Type="FiestaZohoDatabaseModel.Fiesta_Employee" Role="Fiesta_Employee" Multiplicity="1" />
+          <End Type="FiestaZohoDatabaseModel.Fiesta_EmpStoreReport" Role="Fiesta_EmpStoreReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStoreReport">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStates_Fiesta_State">
+          <End Type="FiestaZohoDatabaseModel.Fiesta_State" Role="Fiesta_State" Multiplicity="1" />
+          <End Type="FiestaZohoDatabaseModel.Fiesta_EmpStates" Role="Fiesta_EmpStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStates">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStoreReport_Fiesta_Report">
+          <End Type="FiestaZohoDatabaseModel.Fiesta_Report" Role="Fiesta_Report" Multiplicity="1" />
+          <End Type="FiestaZohoDatabaseModel.Fiesta_EmpStoreReport" Role="Fiesta_EmpStoreReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Report">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStoreReport">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStoreReport_Fiesta_Store">
+          <End Type="FiestaZohoDatabaseModel.Fiesta_Store" Role="Fiesta_Store" Multiplicity="1" />
+          <End Type="FiestaZohoDatabaseModel.Fiesta_EmpStoreReport" Role="Fiesta_EmpStoreReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Store">
+              <PropertyRef Name="StoreNo" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStoreReport">
+              <PropertyRef Name="StoreNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fiesta_EmpStore_Fiesta_Store">
+          <End Type="FiestaZohoDatabaseModel.Fiesta_Store" Role="Fiesta_Store" Multiplicity="1" />
+          <End Type="FiestaZohoDatabaseModel.Fiesta_EmpStore" Role="Fiesta_EmpStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fiesta_Store">
+              <PropertyRef Name="StoreNo" />
+            </Principal>
+            <Dependent Role="Fiesta_EmpStore">
+              <PropertyRef Name="StoreNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -18,5 +18,8 @@ namespace FiestaReports.Models
         public int EmpId { get; set; }
         public int StateId { get; set; }
         public Nullable<System.DateTime> AssignDate { get; set; }
+    
+        public virtual Fiesta_Employee Fiesta_Employee { get; set; }
+        public virtual Fiesta_State Fiesta_State { get; set; }
     }
 }

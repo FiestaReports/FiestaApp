@@ -14,6 +14,14 @@ namespace FiestaReports.Models
     
     public partial class Fiesta_Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Fiesta_Employee()
+        {
+            this.Fiesta_EmpStates = new HashSet<Fiesta_EmpStates>();
+            this.Fiesta_EmpStore = new HashSet<Fiesta_EmpStore>();
+            this.Fiesta_EmpStoreReport = new HashSet<Fiesta_EmpStoreReport>();
+        }
+    
         public int EmpId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,5 +32,12 @@ namespace FiestaReports.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<bool> Reset { get; set; }
         public Nullable<bool> IsActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fiesta_EmpStates> Fiesta_EmpStates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fiesta_EmpStore> Fiesta_EmpStore { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fiesta_EmpStoreReport> Fiesta_EmpStoreReport { get; set; }
     }
 }

@@ -7,14 +7,21 @@
       <Diagram DiagramId="595f032d45c24dd1b1d099f69ecbb30c" Name="Diagram1" >
         <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_Employee" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_EmpStates" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_EmpStoreReport" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_Store" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.ReportFileUpload" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_EmpStore" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_EmpStoreReport" Width="1.5" PointX="6.75" PointY="3.5" />
+        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_Store" Width="1.5" PointX="4.875" PointY="0.625" />
+        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.ReportFileUpload" Width="1.5" PointX="2.625" PointY="4.5" />
+        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_EmpStore" Width="1.5" PointX="7.5" PointY="0.5" />
         <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_ExcelCompare" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_Report" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_Report" Width="1.5" PointX="8.75" PointY="4.25" />
         <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_Role" Width="1.5" PointX="7.375" PointY="6.75" />
         <EntityTypeShape EntityType="FiestaZohoDatabaseModel.Fiesta_State" Width="1.5" PointX="3.375" PointY="8.75" />
+        <AssociationConnector Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStates_Fiesta_Employee" />
+        <AssociationConnector Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStore_Fiesta_Employee" />
+        <AssociationConnector Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Employee" />
+        <AssociationConnector Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStates_Fiesta_State" />
+        <AssociationConnector Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Report" />
+        <AssociationConnector Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStoreReport_Fiesta_Store" />
+        <AssociationConnector Association="FiestaZohoDatabaseModel.FK_Fiesta_EmpStore_Fiesta_Store" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

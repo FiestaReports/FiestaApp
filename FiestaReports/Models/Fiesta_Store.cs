@@ -14,6 +14,13 @@ namespace FiestaReports.Models
     
     public partial class Fiesta_Store
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Fiesta_Store()
+        {
+            this.Fiesta_EmpStoreReport = new HashSet<Fiesta_EmpStoreReport>();
+            this.Fiesta_EmpStore = new HashSet<Fiesta_EmpStore>();
+        }
+    
         public string StoreNo { get; set; }
         public int StateId { get; set; }
         public string Street { get; set; }
@@ -22,5 +29,10 @@ namespace FiestaReports.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public bool IsActive { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fiesta_EmpStoreReport> Fiesta_EmpStoreReport { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fiesta_EmpStore> Fiesta_EmpStore { get; set; }
     }
 }

@@ -14,7 +14,16 @@ namespace FiestaReports.Models
     
     public partial class Fiesta_Report
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Fiesta_Report()
+        {
+            this.Fiesta_EmpStoreReport = new HashSet<Fiesta_EmpStoreReport>();
+        }
+    
         public int ReportId { get; set; }
         public string ReportName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fiesta_EmpStoreReport> Fiesta_EmpStoreReport { get; set; }
     }
 }

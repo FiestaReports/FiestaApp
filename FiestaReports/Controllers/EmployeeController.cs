@@ -187,14 +187,10 @@ namespace FiestaReports.Controllers
         [HttpGet]
         public ActionResult _EmployeeReports(int id)
         {
-            var model = db.Fiesta_Employee.FirstOrDefault(x => x.EmpId == id);
-            if (model == null)
-            {
-                model = new Fiesta_Employee();
-                ViewBag.Message = "No data available";
-            }
+            var employee = db.Fiesta_Employee.FirstOrDefault(x => x.EmpId == id);
+            var model = ReportsByEmployee(id);
+            model.Employee = employee;
 
-            var test = ReportsByEmployee(id);
             return PartialView(model);
         }
 
@@ -227,26 +223,27 @@ namespace FiestaReports.Controllers
             return db.Fiesta_Role;
         }
         
-        private List<EmployeeReports>ReportsByEmployee(int empId)
+        private EmployeeReports ReportsByEmployee(int empId)
         {
+
             var storesByEmployee = (from e in db.Fiesta_Employee
                                     join es in db.Fiesta_EmpStore on e.EmpId equals es.EmpId
                                     join s in db.Fiesta_Store on es.StoreNo equals s.StoreNo
                                     where e.EmpId == empId
-                                    select s);
+                                    select s).ToList();
 
-            var reportsByLogedUser = ReportsByLogedUser();
-
-            var test = (from s in storesByEmployee
-                        join esr in db.Fiesta_EmpStoreReport on s.StoreNo equals esr.StoreNo into group1
-                        from g1 in group1.DefaultIfEmpty()
-                        join ru in reportsByLogedUser on g1.ReportId equals ru.ReportId 
-                        select g1).ToList();
+            var reportsAvailable = ReportsByLogedUser().ToList();
 
 
+            var empReports = db.Fiesta_EmpStoreReport.Where(x => x.EmpId == empId).ToList();
 
+            var model = new EmployeeReports {
+                Stores = storesByEmployee,
+                Reports = reportsAvailable,
+                EmpStoreReports = empReports
+            };
 
-            return new List<EmployeeReports>();
+            return model;
         }
 
         private IQueryable<Fiesta_Report> ReportsByLogedUser()
