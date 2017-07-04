@@ -12,6 +12,11 @@
     <div class="modal-body">
         <form class="form-horizontal">
             <div class="form-group">
+                <div class="col-md-4">
+                    <span class="hidden text-danger" id="spMessage"></span>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-md-1 col-md-offset-1">
                     <label for="fillname">Name</label>
                 </div>
@@ -21,39 +26,63 @@
             </div>
             <div class="form-group">
                 <div class="col-md-10">
-                    <table>
+                    <table id="tblReportsByStore">
                         <tr>
                             <th></th>
                             @{foreach (var report in Model.Reports)
-                                {
-                                    <th style="width:auto" class="text-center">@report.ReportName</th>
-                                }
-                            }
+                            {
+                                <th style="width:auto" class="text-center">@report.ReportName</th>
+                            }}
                         </tr>
                         @{foreach (var store in Model.Stores)
-                            {
-                                <tr>
-                                    <td class="text-primary col-md-2">@store.City</td>
-                                    @{foreach (var report in Model.Reports)
-                                        {
-                                            var chkId = string.Format("{0}_{1}", store.StoreNo, report.ReportId.ToString());
-                                            var isAssigned = Model.EmpStoreReports.Any(x => x.StoreNo == store.StoreNo && x.ReportId == report.ReportId) ? "checked" : string.Empty;
-                                            <td class="text-center"><input type="checkbox" id="@chkId" @isAssigned /></td>
-                                        }
-                                    }
-                                </tr>
-                            }
-                        }
+                        {
+                            <tr>
+                                <td class="text-primary col-md-2">@store.City</td>
+                                @{foreach (var report in Model.Reports)
+                                {
+                                    var chkId = string.Format("{0}_{1}", store.StoreNo, report.ReportId.ToString());
+                                    var isAssigned = Model.EmpStoreReports.Any(x => x.StoreNo == store.StoreNo && x.ReportId == report.ReportId) ? "checked" : string.Empty;
+                                    <td class="text-center"><input type="checkbox" id="@chkId" @isAssigned /></td>
+                                }}
+                            </tr>
+                        }}
                     </table>
-                    
-
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnAssignReports">Save changes</button>
+        <button type="button" class="btn btn-primary" id="btnSaveReports">Assign reports</button>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSaveReports").click(function () {
+            var assignedReports = new Array();
+            $('#tblReportsByStore input[type="checkbox"]:checked').each(function () {
+                assignedReports.push($(this).attr('id'));
+            });
 
+            $.ajax({
+                url: "@Url.Action("AssignReports", "Employee")",
+                data: { storeReports: assignedReports, empId : $("#Employee_EmpId").val() },
+                dataType: "json",
+                type: "POST",
+                error: function () {
+                },
+                success: function (result) {
+                    if (result != 'Success')
+                    {
+                        $("#spMessage").html(result);
+                        $("#spMessage").removeClass('hidden');
+                        $("#btnSaveReports").prop('disabled', true);
+                    } else {
+                        $('#employees').DataTable().ajax.reload();
+                        $('#empReportsModal').modal('hide');
+                    }
+                }
+            });
+        });
+    });
+</script>

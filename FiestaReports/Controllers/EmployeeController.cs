@@ -194,6 +194,33 @@ namespace FiestaReports.Controllers
             return PartialView(model);
         }
 
+        [AuthorizationFilter]
+        [HttpPost]
+        public ActionResult AssignReports(string[] storeReports, int empId)
+        {
+            List<KeyValuePair<int, string>> assignedReports = new List<KeyValuePair<int, string>>();
+            
+            foreach (var storeReport in storeReports)
+            {
+                string[] sArray = storeReport.Split('_');
+                var store = sArray[0];
+                var report = int.Parse(sArray[1]);
+
+                assignedReports.Add(new KeyValuePair < int, string > (report, store));
+            }
+
+            try
+            {
+                ManageStoreReportsForEmployee(assignedReports, empId);
+            }
+            catch (Exception e)
+            {
+                return Json("Something went wrong, try again later!", JsonRequestBehavior.AllowGet);
+            }
+
+            return Json("Success", JsonRequestBehavior.AllowGet); ;
+        }
+
 
         private IQueryable<Fiesta_Store> StoresByUser()
         {
@@ -261,6 +288,28 @@ namespace FiestaReports.Controllers
                     where est.EmpId == userId &&
                     est.ReportId != 7 //FROM DB
                     select r);
+        }
+
+        private void ManageStoreReportsForEmployee(List<KeyValuePair<int, string>> storeReports, int empId)
+        {
+            //remove all existing reports by store for employee
+            db.Fiesta_EmpStoreReport.
+                RemoveRange(db.Fiesta_EmpStoreReport.Where(x => x.EmpId == empId));
+
+            //save new reports by store for employee
+            foreach (var storeReport in storeReports)
+            {
+                var item = new Fiesta_EmpStoreReport
+                {
+                    EmpId = empId,
+                    StoreNo = storeReport.Value,
+                    ReportId = storeReport.Key
+                };
+
+                db.Fiesta_EmpStoreReport.Add(item);
+            }
+
+            db.SaveChanges();
         }
     }
 }
