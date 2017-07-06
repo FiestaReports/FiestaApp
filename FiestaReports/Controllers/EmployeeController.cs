@@ -191,6 +191,13 @@ namespace FiestaReports.Controllers
             var model = ReportsByEmployee(id);
             model.Employee = employee;
 
+            var userRole = int.Parse(Session["UserRole"].ToString());
+
+            if (userRole == (int)UserTypeEnum.National)
+            {
+                ViewBag.IsAdmin = true;
+            }
+
             return PartialView(model);
         }
 

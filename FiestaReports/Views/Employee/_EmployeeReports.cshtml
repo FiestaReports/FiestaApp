@@ -1,7 +1,12 @@
 ﻿@model FiestaReports.Models.EmployeeReports
 @{
-    @Html.HiddenFor(m=> m.Employee.EmpId)
+    @Html.HiddenFor(m => m.Employee.EmpId)
     var fullName = string.Format("{0} {1}", Model.Employee.FirstName, Model.Employee.LastName);
+    var isAdmin = false;
+    if (ViewBag.IsAdmin != null)
+    {
+        isAdmin = true;
+    }
 }
 
 <div class="modal-content">
@@ -16,45 +21,63 @@
                 <span class="hidden alert alert-danger col-md-12" id="spMessage"></span>
             </div>
         </div>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <div class="col-md-1 col-md-offset-1">
-                    <label for="fillname">Name</label>
+        @{if (isAdmin)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="alert alert-info col-md-12">National users have acces to all stores and reports!</span>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <input type="text" class="form-control col-md-2" id="txtFullName" disabled="disabled" value="@fullName">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-12" style="height:400px; width:800px; overflow-x:scroll; overflow-y:scroll;">
-                    <table id="tblReportsByStore">
-                        <tr>
-                            <th></th>
-                            @{foreach (var report in Model.Reports)
-                            {
-                                <th style="width:auto" class="text-center">@report.ReportName</th>
-                            }}
-                        </tr>
-                        @{foreach (var store in Model.Stores)
-                        {
-                            <tr class="store" stnm="@store.StoreNo">
-                                <td class="text-primary col-md-3">@store.City</td>
-                                @{foreach (var report in Model.Reports)
+            }
+            else
+            {
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-1 col-md-offset-1">
+                            <label for="fillname">Name</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control col-md-2" id="txtFullName" disabled="disabled" value="@fullName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="height:400px; width:800px; overflow-x:scroll; overflow-y:scroll;">
+                            <table id="tblReportsByStore">
+                                <tr>
+                                    <th></th>
+                                    @{foreach (var report in Model.Reports)
+                                    {
+                                        <th style="width:auto" class="text-center">@report.ReportName</th>
+                                    }}
+                                </tr>
+                                @{foreach (var store in Model.Stores)
                                 {
-                                    var chkId = string.Format("{0}_{1}", store.StoreNo, report.ReportId.ToString());
-                                    var isAssigned = Model.EmpStoreReports.Any(x => x.StoreNo == store.StoreNo && x.ReportId == report.ReportId) ? "checked" : string.Empty;
-                                    <td class="text-center"><input type="checkbox" id="@chkId" @isAssigned /></td>
+                                    <tr class="store" stnm="@store.StoreNo">
+                                        <td class="text-primary col-md-3">@store.City</td>
+                                        @{foreach (var report in Model.Reports)
+                                            {
+                                                var chkId = string.Format("{0}_{1}", store.StoreNo, report.ReportId.ToString());
+                                                var isAssigned = Model.EmpStoreReports.Any(x => x.StoreNo == store.StoreNo && x.ReportId == report.ReportId) ? "checked" : string.Empty;
+                                                <td class="text-center"><input type="checkbox" id="@chkId" @isAssigned /></td>
+                                            }}
+                                    </tr>
                                 }}
-                            </tr>
-                        }}
-                    </table>
-                </div>
-            </div>
-        </form>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+    } }
+
+        
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnSaveReports">Assign reports</button>
+        @{ if (!isAdmin)
+            {
+                <button type="button" class="btn btn-primary" id="btnSaveReports">Assign reports</button>
+            }
+        }
+        
     </div>
 </div>
 <script type="text/javascript">

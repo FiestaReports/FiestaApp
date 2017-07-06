@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js"></script>
+    <script type="text/javascript" src="https:////cdn.datatables.net/plug-ins/1.10.15/dataRender/ellipsis.js"></script>
     <style>
         body {
             position: relative;
@@ -51,6 +52,14 @@
         #reportLink {
             color: #fff;
         }
+
+        hr.border2 {
+	        margin-top: 10px;
+            margin-bottom: 15px;
+            border: 0;
+            border-top: 2px solid #ddd;
+        }
+
     </style>
     <script type="text/javascript">
         var EmpId1 = 0;
@@ -319,7 +328,7 @@
                     { data: 'LastName' },
                     { data: 'Email' },
                     { data: 'Role' },
-                    { data: 'EmpStore' },
+                    { data: 'EmpStore', render: $.fn.dataTable.render.ellipsis(20, true) },
                     { data: 'Active' },
                     {
                         data: 'EmpId',
@@ -543,93 +552,86 @@
     </script>
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
-    <div class="body-content">
-
-    </div>
+<body>
     <div class="container">
         <h3>Manage Employees</h3>
         <p></p>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Add New Employee</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <form class="form-inline">
-                            <div>
-                                <div class="alert alert-info">
-                                    <strong>Info!..</strong><br />
-                                    <strong>1.</strong> Use only Fiesta email to register. &nbsp;
-                                    <strong>2.</strong> Password has to be minimum 5 characters in length.
-                                </div>
-                                <label class="sr-only" for="exampleSelect1">Firstname</label>
-                                @Html.TextBoxFor(m => m.firstName, new { @class = "form-control register", @placeholder = "Firstname" })
-
-                                <label class="sr-only" for="inlineFormInput">Lastname</label>
-                                @Html.TextBoxFor(m => m.lastName, new { @class = "form-control register", @placeholder = "Lastname" })
-
-                                <label class="sr-only" for="inlineFormInput">Email</label>
-                                @Html.TextBoxFor(m => m.emailEmployee, new { @class = "form-control register", @placeholder = "Email" })
-
-                                <label class="sr-only" for="inlineFormInput">Password</label>
-                                @Html.PasswordFor(m => m.password, new { @class = "form-control register", @placeholder = "Password" })
-
-                                <label class="sr-only" for="inlineFormInput">Confirm password</label>
-                                @Html.PasswordFor(m => m.confirmpassword, new { @class = "form-control register", @placeholder = "Confirm Password" })
-
-                                <button type="button" class="btn btn-primary" id="btnRegister">
-                                    <span class="glyphicon glyphicon-registration-mark"></span> Register
-                                </button>
-                            </div>
-                            <div>
-                                <div class="alert alert-success" id="dvRSuccess" style="display:none;">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                    <strong>Success!..</strong> <label id="lblRSuccess" style="font: italic"></label>
-                                </div>
-                                <div class="alert alert-danger" id="dvRFailure" style="display:none;">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                    <strong>Warning!..</strong> <label id="lblRFailure"></label>
-                                </div>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h3>Current Employees</h3>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5><strong>Add New Employee</strong></h5>
+                    </div>
+                </div>
+                <hr class="border2" />
+                <div class="container">
+                    <form class="form-inline">
                         <div>
-                            <form style="padding-top:10px">
-                                <table id="employees" class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Firstname</th>
-                                            <th>Lastname</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Stores</th>
-                                            <th>Is Active</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
+                            <div class="alert alert-info">
+                                <strong>Info!..</strong><br />
+                                <strong>1.</strong> Use only Fiesta email to register. &nbsp;
+                                <strong>2.</strong> Password has to be minimum 5 characters in length.
+                            </div>
+                            <label class="sr-only" for="exampleSelect1">Firstname</label>
+                            @Html.TextBoxFor(m => m.firstName, new { @class = "form-control register", @placeholder = "Firstname" })
 
-            </tbody>
-        </table>
+                            <label class="sr-only" for="inlineFormInput">Lastname</label>
+                            @Html.TextBoxFor(m => m.lastName, new { @class = "form-control register", @placeholder = "Lastname" })
+
+                            <label class="sr-only" for="inlineFormInput">Email</label>
+                            @Html.TextBoxFor(m => m.emailEmployee, new { @class = "form-control register", @placeholder = "Email" })
+
+                            <label class="sr-only" for="inlineFormInput">Password</label>
+                            @Html.PasswordFor(m => m.password, new { @class = "form-control register", @placeholder = "Password" })
+
+                            <label class="sr-only" for="inlineFormInput">Confirm password</label>
+                            @Html.PasswordFor(m => m.confirmpassword, new { @class = "form-control register", @placeholder = "Confirm Password" })
+
+                            <button type="button" class="btn btn-primary" id="btnRegister">
+                                <span class="glyphicon glyphicon-registration-mark"></span> Register
+                            </button>
+                        </div>
+                        <div>
+                            <div class="alert alert-success" id="dvRSuccess" style="display:none;">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <strong>Success!..</strong> <label id="lblRSuccess" style="font: italic"></label>
+                            </div>
+                            <div class="alert alert-danger" id="dvRFailure" style="display:none;">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <strong>Warning!..</strong> <label id="lblRFailure"></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <hr class="border2" />
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Current Employees</h3>
+                    </div>
+                </div>
+                <hr class="border2" />
+                <div class="row">
+                    <div class="row col-md-12">
+                        <table id="employees" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Stores</th>
+                                    <th>Is Active</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         @*This is modal for editing the Role, State and Stores*@
         <div class="modal fade" id="empStoresModal" role="dialog">
