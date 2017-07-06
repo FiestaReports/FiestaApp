@@ -7,15 +7,16 @@
 <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Reports Assigned</h4>
+        <h4 class="modal-title" id="hStoreReps">Assign reports by store</h4>
     </div>
+   
     <div class="modal-body">
-        <form class="form-horizontal">
-            <div class="form-group">
-                <div class="col-md-4">
-                    <span class="hidden text-danger" id="spMessage"></span>
-                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="hidden alert alert-danger col-md-12" id="spMessage"></span>
             </div>
+        </div>
+        <form class="form-horizontal">
             <div class="form-group">
                 <div class="col-md-1 col-md-offset-1">
                     <label for="fillname">Name</label>
@@ -25,7 +26,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-10">
+                <div class="col-md-12" style="height:400px; width:800px; overflow-x:scroll; overflow-y:scroll;">
                     <table id="tblReportsByStore">
                         <tr>
                             <th></th>
@@ -36,8 +37,8 @@
                         </tr>
                         @{foreach (var store in Model.Stores)
                         {
-                            <tr>
-                                <td class="text-primary col-md-2">@store.City</td>
+                            <tr class="store" stnm="@store.StoreNo">
+                                <td class="text-primary col-md-3">@store.City</td>
                                 @{foreach (var report in Model.Reports)
                                 {
                                     var chkId = string.Format("{0}_{1}", store.StoreNo, report.ReportId.ToString());
@@ -59,6 +60,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#btnSaveReports").click(function () {
+            if (StoresWithoutReport() > 0) {
+                $("#spMessage").html('You should select at least one report by store!');
+                $("#spMessage").removeClass('hidden');
+                return;
+            }
             var assignedReports = new Array();
             $('#tblReportsByStore input[type="checkbox"]:checked').each(function () {
                 assignedReports.push($(this).attr('id'));
@@ -74,6 +80,7 @@
                 success: function (result) {
                     if (result != 'Success')
                     {
+                        $("#spMessage").html('');
                         $("#spMessage").html(result);
                         $("#spMessage").removeClass('hidden');
                         $("#btnSaveReports").prop('disabled', true);
@@ -85,4 +92,19 @@
             });
         });
     });
+
+    function StoresWithoutReport() {
+        var storesNoReport = 0;
+        $('.store').each(function () {
+            var count = $(this).find(':checkbox:checked').length;
+            if (count > 0) {
+                $(this).removeClass('Red-border');
+            } else {
+                $(this).addClass('Red-border');
+                storesNoReport++;
+            }
+        });
+
+        return storesNoReport;
+    }
 </script>

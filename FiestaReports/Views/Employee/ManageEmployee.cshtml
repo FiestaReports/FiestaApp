@@ -260,24 +260,8 @@
                         error: function () {
                         },
                         success: function (data) {
-                            $.ajax({
-                                url: "@Url.Action("GetEmployeeStores", "Account")" + "?EmpId=" + EmpId,
-                                data: obj,
-                                dataType: "json",
-                                type: "POST",
-                                error: function () {
-                                },
-                                success: function (data) {
-                                    $.each(data, function (i) {
-
-                                        var optionhtml = '<option value="' +
-                                    data[i].storeNo + '">' + data[i].Store + '</option>';
-                                        $("#dlStores1").append(optionhtml);
-                                    });
-                                    $('#step2').hide();
-                                    $('#step3').modal();
-                                }
-                            });
+                            $('#step2').hide();
+                            ManageReports(EmpId, false);
                         }
                     });
                 }
@@ -350,7 +334,7 @@
                     }, {
                         data: 'EmpId',
                         render: function (data, type, full, meta) {
-                            return '<a href="javascript:ManageReports(' + data + ')">Manage reports</a>';
+                            return '<a href="javascript:ManageReports(' + data + ', true)">Manage reports</a>';
                         }
                     }
                 ]
@@ -541,7 +525,7 @@
             });
         };
 
-        function ManageReports(empId) {
+        function ManageReports(empId, isEdit) {
             $.ajax({
                 url: '@Url.Action("_EmployeeReports", "Employee")',
                 type: 'GET',
@@ -549,7 +533,9 @@
                 success: function (result) {
                     $("#employeeReports").html(result);
                     $("#empReportsModal").modal();
-
+                    if (isEdit) {
+                        $("#hStoreReps").html('Edit reports by store');
+                    }
                 }
             });
         };
@@ -558,6 +544,9 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div class="body-content">
+
+    </div>
     <div class="container">
         <h3>Manage Employees</h3>
         <p></p>
@@ -735,41 +724,6 @@
 
         <div class="modal fade" id="step3">
             <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header"><strong>Assign Reports</strong></div>
-                    <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <label for="lname" class="col-md-3 control-label">Name</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="lnametext1" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="report" class="col-md-3 control-label">Store</label>
-
-                                <div class="col-md-8">
-                                    <select multiple class="form-control" id="dlStores1"></select>
-                                    `
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="role" class="col-md-3 control-label">Assigned reports</label>
-
-                                <div class="col-md-8" id="dvReports">
-
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <div style="margin-left:310px">
-                                    <button type="button" class="btn btn-primary" id="btnAssignReports">
-                                        <span class="glyphicon glyphicon-registration-mark"></span> Assign
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
